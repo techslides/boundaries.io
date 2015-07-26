@@ -1,6 +1,6 @@
 {
   "name": "boundaries.io",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "dependencies": {
     "kona": "^0.9.6",
     "kona-mongo": "*"
