@@ -2,6 +2,10 @@
   "name": "boundaries.io",
   "version": "0.0.0",
   "dependencies": {
+    "kona": "^0.9.6",
+    "kona-mongo": "*"
+  },
+  "devDependencies": {
     "browserify": "^11.0.0",
     "gulp-babel": "^5.1.0",
     "gulp-if": "^1.2.5",
@@ -9,8 +13,6 @@
     "gulp-plumber": "^1.0.1",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.2.0",
-    "kona": "^0.9.6",
-    "kona-mongo": "*",
     "vinyl-buffer": "^1.0.0",
     "watchify": "^3.3.0"
   },
