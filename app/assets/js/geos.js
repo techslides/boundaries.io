@@ -250,7 +250,13 @@ var GeoMap = Map.extend({
 
     this.featureGroup.addLayer(featureLayer);
 
-    this.map.fitBounds(this.featureGroup.getBounds());
+    this.map.fitBounds(this.featureGroup.getBounds(), {padding: L.point(100, 100)});
+
+    try {
+      localStorage.setItem('bounds',
+        this.featureGroup.getBounds().toBBoxString()
+      );
+    } catch(e) {console.error(e)}
 
   },
 
@@ -262,11 +268,6 @@ var GeoMap = Map.extend({
 
     if (this.geos && this.geos.length) {
       this.geos.each(this.addModelFeature, this);
-      try {
-        localStorage.setItem('bounds',
-          this.featureGroup.getBounds().toBBoxString()
-        );
-      } catch(e) {}
     }
   }
 });
