@@ -23,7 +23,9 @@ Geographies can be searched via text to match against all attributes. This is he
 
 Example:
 
-`curl -H 'Accept: application/json' http://boundaries.io/geographies/postal-codes?search=33060
+```
+curl -H 'Accept: application/json' http://boundaries.io/geographies/postal-codes?search=33060
+```
 
 #### Where Am I?
 
@@ -38,7 +40,9 @@ The corresponding mongodb geospatial query operator is `$geoIntersects`.
 
 Example:
 
-`curl -H 'Accept: application/json' http://boundaries.io/geographies/postal-codes/whereami?lat=36.011616617997426&lng=-78.9103317260742`
+```
+curl -H 'Accept: application/json' http://boundaries.io/geographies/postal-codes/whereami?lat=36.011616617997426&lng=-78.9103317260742
+```
 
 #### Named
 
@@ -51,8 +55,10 @@ name property. For postal codes this is the 5-digit common code. For states this
 
 Example:
 
-`curl -H 'accept: application/json' http://boundaries.io/geographies/postal-codes/named/27705`
-`curl -H 'accept: application/json' http://boundaries.io/geographies/states/named/north%20carolina`
+```
+curl -H 'accept: application/json' http://boundaries.io/geographies/postal-codes/named/27705
+curl -H 'accept: application/json' http://boundaries.io/geographies/states/named/north%20carolina
+```
 
 #### Near "Me"
 
@@ -64,7 +70,9 @@ The corresponding mongodb geospatial query operator is `$near`.
 
 Example:
 
-`curl -H 'Accept: application/json' http://boundaries.io/geographies/postal-codes/nearme?lat=36.011616617997426&lng=-78.9103317260742`
+```
+curl -H 'Accept: application/json' http://boundaries.io/geographies/postal-codes/nearme?lat=36.011616617997426&lng=-78.9103317260742
+```
 
 ### Where did the data come from?
 
