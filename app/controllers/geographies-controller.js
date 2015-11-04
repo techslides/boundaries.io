@@ -5,6 +5,7 @@ var GeographiesController = ApplicationController.extend({
   constructor: function() {
     ApplicationController.apply(this, arguments);
     this.beforeFilter('_setType', '_mountCollection');
+    this.nameKey = 'properties.NAME';
   },
 
   _setType: function* () {
@@ -35,6 +36,14 @@ var GeographiesController = ApplicationController.extend({
     var geo = yield this.geos.findOne({
       _id: this.mongo._db.bsonLib.ObjectID(this.params.id)
     });
+    this.set('geography', geo);
+    yield this.respondWith(geo);
+  },
+
+  named: function* () {
+    var criteria = {};
+    criteria[this.nameKey] = this.params.name;
+    var geo = yield this.geos.find(criteria);
     this.set('geography', geo);
     yield this.respondWith(geo);
   },
