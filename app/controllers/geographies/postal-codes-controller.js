@@ -6,6 +6,7 @@ var PostalCodesController = GeographiesController.extend({
     GeographiesController.apply(this, arguments);
     this.respondsTo('html', 'json');
     this.type = 'PostalCode';
+    this.nameKey = 'properties.ZCTA5CE10'
     this.collection = 'postalcodes';
   }
 
