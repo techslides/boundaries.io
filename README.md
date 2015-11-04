@@ -1,25 +1,39 @@
 # boundaries.io
 
-boundaries.io is an API for retrieving GeoJSON for common US geographic topologies. Data is mostly comprised of US Census TIGER data—yielding up-to-date information on the census-defined geographies converted from Shapefile format.
+boundaries.io is an API for retrieving GeoJSON for common US geographic topologies. 
+Data is mostly comprised of US Census TIGER data—yielding up-to-date information on the 
+census-defined geographies converted from Shapefile format.
 
-You can query the boundaries.io API for free to retrieve GeoJSON documents in the same format as the shapefiles.
+You can query the boundaries.io API for free to retrieve GeoJSON documents with the 
+same meta properties as the original shapefiles.
 
 
 ![demo](http://i.imgur.com/syzYebz.gif)
 
-### API Endpoints
+## API Endpoints
 
 Available geographies are as follows:
 
-`['counties', 'postalcodes', 'states', 'cities', 'places']`
+`states`
+`postal-codes`
+`places`
+`neighborhoods`
+`counties`
 
 These can be substituted anywhere a url references a path segment `:geo-name`
 
-#### Text Search
+
+Text Search
+---
 
 `geographies/:geo-name?search={query}`
 
-Geographies can be searched via text to match against all attributes. This is helpful as the property names for certain geographies can be very specific in nature to the geography or datasource. For instance, a common 5-digit US postal code is contained in the property `properties.ZCTA5CE10` in the `postal-codes` geography. In order to not keep track of specific collection-based common names like `ZCTA5CE10`, a search paramter is used on the `geographies/:geo-name` endpoint to search all text fields for a url query `?search`.
+Geographies can be searched via text to match against all attributes. This is 
+helpful as the property names for certain geographies can be very specific in nature 
+to the geography or datasource. For instance, a common 5-digit US postal code is contained 
+in the property `properties.ZCTA5CE10` in the `postal-codes` geography. In order to not keep 
+track of specific collection-based common names like `ZCTA5CE10`, a search paramter is used on 
+the `geographies/:geo-name` endpoint to search all text fields for a url query `?search`.
 
 Example:
 
@@ -27,7 +41,9 @@ Example:
 curl -H 'Accept: application/json' http://boundaries.io/geographies/postal-codes?search=33060
 ```
 
-#### Where Am I?
+
+Where Am I?
+---
 
 `geographies/:geo-name/whereami?lat={latitude}&lng={longitude}`
 
@@ -44,7 +60,9 @@ Example:
 curl -H 'Accept: application/json' http://boundaries.io/geographies/postal-codes/whereami?lat=36.011616617997426&lng=-78.9103317260742
 ```
 
-#### Named
+
+Named
+---
 
 `geographies/:geo-name/named/{name}`
 
@@ -60,7 +78,9 @@ curl -H 'accept: application/json' http://boundaries.io/geographies/postal-codes
 curl -H 'accept: application/json' http://boundaries.io/geographies/states/named/north%20carolina
 ```
 
-#### Near "Me"
+
+Near Me
+---
 
 `geographies/:geo-name/nearme?lat={latitude}&lng={longitude}`
 
