@@ -3,7 +3,8 @@
   "version": "0.1.2",
   "dependencies": {
     "kona": "^0.9.6",
-    "kona-mongo": "*"
+    "kona-mongo": "*",
+    "marked": "^0.3.5"
   },
   "devDependencies": {
     "browserify": "^11.0.0",

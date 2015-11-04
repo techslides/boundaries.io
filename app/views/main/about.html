@@ -1,7 +1,6 @@
 {% extends '../layouts/application.html' %}
 
 {% block content %}
-
 <div class="hero">
   <div class="cta">
     <span class="text">Divide</span>
@@ -11,28 +10,12 @@
 </div>
 
 <br>
+
 <div class="row">
   <div class="large-8 columns">
     <div class="row">
       <div class="small-12 columns">
-        <h3>Where did the data come from?</h3>
-        <p>
-          Counties, States, Zips, and Places data were collected from
-          <a target="_blank" href="https://www.census.gov/geo/maps-data/data/tiger-line.html">
-            The US Census Bureau Tiger/Line<sup>&reg;</sup> Shapefiles
-          </a>
-        </p>
-        <p>
-          Neighborhood data was sourced from
-          <a target="_blank" href="http://www.zillow.com/howto/api/neighborhood-boundaries.htm">
-            Zillow's Neighborhood Boundaries
-          </a> shapefile data
-          and the <a target="_blank" href="http://durhamhoods.com/">Durham Hoods</a> project.
-        </p>
-        <h3>Who made it?</h3>
-        <p>
-          <a target="_blank" href="https://github.com/jbielick/boundaries.io">view the source on Github</a>
-        </p>
+        {{ readme | safe }}
       </div>
     </div>
   </div>
@@ -60,5 +43,4 @@
     </a>
   </div>
 </div>
-
 {% endblock %}

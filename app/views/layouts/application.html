@@ -50,10 +50,10 @@
         </section>
       </div>
     </nav>
-    <div class="content">
+    <div class="{% block contentclass %}content{% endblock %}">
       {% block content %}{% endblock %}
     </div>
-    <footer class="row">
+    <footer class="row {% block footerclass %}{% endblock %}">
       <div class="large-12 columns">
         <hr/>
         <div class="row">

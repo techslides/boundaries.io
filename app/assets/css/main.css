@@ -333,7 +333,7 @@ nav .name {
 }
 
 
-.content {
+.abs-content {
     position: absolute;
     width: 100%;
     top: 45px;
@@ -357,10 +357,10 @@ nav .name {
     display: inline-block;
 }
 
-footer {
-    position:absolute;
-    bottom:0;
-    width:100%;
+.abs-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     left: 0;
     right: 0;
 }
