@@ -42,10 +42,17 @@ var GeographiesController = ApplicationController.extend({
 
   named: function* () {
     var criteria = {};
-    criteria[this.nameKey] = this.params.name;
-    var geo = yield this.geos.find(criteria);
-    this.set('geography', geo);
-    yield this.respondWith(geo);
+    var geo;
+    criteria[this.nameKey] = new RegExp(this.params.name, 'i');
+    try {
+      geo = yield this.geos.findOne(criteria);
+    } catch (e) {}
+    if (geo) {
+      this.set('geography', geo);
+      yield this.respondWith(geo);
+    } else {
+      this.throw(404);
+    }
   },
 
   whereami: function* () {
