@@ -305,8 +305,8 @@ body, h1, h2, h3, h4, h5, p, span {
 }
 
 .hero .text {
-    font-size: 70px;
-    font-family: Merriweather, serif;
+    font-size: 50px;
+    text-transform: lowercase;
     background-color: rgba(0,0,0,0.2);
     line-height: 1.2;
     padding: 0 8px;
