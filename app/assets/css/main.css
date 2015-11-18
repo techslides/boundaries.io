@@ -347,6 +347,7 @@ nav .name {
     bottom:0;
     right:0;
     height:100%;
+    cursor: crosshair;
 }
 
 #map.full {
