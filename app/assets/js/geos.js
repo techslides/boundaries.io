@@ -250,7 +250,7 @@ var GeoMap = Map.extend({
 
     this.featureGroup.addLayer(featureLayer);
 
-    this.map.fitBounds(this.featureGroup.getBounds(), {padding: L.point(100, 100)});
+    // this.map.fitBounds(this.featureGroup.getBounds(), {padding: L.point(100, 100)});
 
     try {
       localStorage.setItem('bounds',
