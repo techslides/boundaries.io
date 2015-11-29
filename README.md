@@ -1,5 +1,7 @@
 # boundaries.io
 
+[![Build Status](https://travis-ci.org/jbielick/kona.svg?branch=master)](https://travis-ci.org/jbielick/kona)
+
 boundaries.io is an API for retrieving GeoJSON for common US geographic topologies.
 Data is mostly comprised of US Census TIGER data—yielding up-to-date information on the
 census-defined geographies converted from Shapefile format.
