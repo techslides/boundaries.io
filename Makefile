@@ -3,16 +3,16 @@ tiger_url=ftp://ftp2.census.gov/geo/tiger/TIGER2014
 db_name=geo
 
 zcta5: zcta5.geo.json
-	$(call importAndIndex,"postalcodes","properties.GEOID10")
+	$(call importAndIndex,postalcodes,properties.GEOID10)
 
 county: county.geo.json
-	$(call importAndIndex,"counties","properties.NAME")
+	$(call importAndIndex,counties,properties.NAME)
 
 place: place.geo.json
-	$(call importAndIndex,"places","properties.NAME")
+	$(call importAndIndex,places,properties.NAME)
 
 state: state.geo.json
-	$(call importAndIndex,"states","properties.NAME")
+	$(call importAndIndex,states,properties.NAME)
 
 %.geo.json: %.zip
 	ogr2ogr -t_srs crs:84 -f "GeoJSON" /vsistdout/ /vsizip/$< | \
@@ -42,7 +42,7 @@ define importAndIndex
 		--db $(db_name) \
 		< ./$<
 	mongo localhost/$(db_name) --eval "JSON.stringify(db.$1.ensureIndex({geometry: '2dsphere'}))"
-	mongo localhost/$(db_name) --eval "JSON.stringify(db.$1.ensureIndex({'properties.$2': 'text'}))"
+	mongo localhost/$(db_name) --eval "JSON.stringify(db.$1.ensureIndex({'$2': 'text'}))"
 endef
 
 .PRECIOUS: %.zip %.geo.json
