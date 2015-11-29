@@ -94,6 +94,15 @@ Example:
 curl -H 'Accept: application/json' http://boundaries.io/geographies/postal-codes/nearme?lat=36.011616617997426&lng=-78.9103317260742
 ```
 
+Requesting TopoJSON data:
+---
+
+The API may also be able to reduce large GeoJSON features by up to 80% in size using `topojson`. To
+request topojson topologies instead of GeoJSON, simply use an `Accept: application/topojson` header
+in your request to the API. If possible, the geography will be encoded into a topology.
+See [`topojson.feature`](https://github.com/mbostock/topojson/wiki/API-Reference#feature) for info
+on transforming this back to GeoJSON on the client side.
+
 ### Where did the data come from?
 
 Counties, States, Zips, and Places data were collected from
