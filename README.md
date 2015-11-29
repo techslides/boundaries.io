@@ -1,10 +1,10 @@
 # boundaries.io
 
-boundaries.io is an API for retrieving GeoJSON for common US geographic topologies. 
-Data is mostly comprised of US Census TIGER data—yielding up-to-date information on the 
+boundaries.io is an API for retrieving GeoJSON for common US geographic topologies.
+Data is mostly comprised of US Census TIGER data—yielding up-to-date information on the
 census-defined geographies converted from Shapefile format.
 
-You can query the boundaries.io API for free to retrieve GeoJSON documents with the 
+You can query the boundaries.io API for free to retrieve GeoJSON documents with the
 same meta properties as the original shapefiles.
 
 
@@ -28,11 +28,11 @@ Text Search
 
 `geographies/:geo-name?search={query}`
 
-Geographies can be searched via text to match against all attributes. This is 
-helpful as the property names for certain geographies can be very specific in nature 
-to the geography or datasource. For instance, a common 5-digit US postal code is contained 
-in the property `properties.ZCTA5CE10` in the `postal-codes` geography. In order to not keep 
-track of specific collection-based common names like `ZCTA5CE10`, a search paramter is used on 
+Geographies can be searched via text to match against all attributes. This is
+helpful as the property names for certain geographies can be very specific in nature
+to the geography or datasource. For instance, a common 5-digit US postal code is contained
+in the property `properties.ZCTA5CE10` in the `postal-codes` geography. In order to not keep
+track of specific collection-based common names like `ZCTA5CE10`, a search paramter is used on
 the `geographies/:geo-name` endpoint to search all text fields for a url query `?search`.
 
 Example:
@@ -102,3 +102,31 @@ Counties, States, Zips, and Places data were collected from
 Neighborhood data was sourced from
 [Zillow's Neighborhood Boundaries](http://www.zillow.com/howto/api/neighborhood-boundaries.htm) shapefile
 data and the [Durham Hoods](http://durhamhoods.com/) project.
+
+### Setting up a development environment
+
+You can use vagrant / virtualbox to setup a dev environment easily. See the `Vagrantfile` for
+dependencies if you opt to not use a VM.
+
+Make sure you have `vagrant` and `virtualbox`
+
+`brew cask install vagrant`
+
+`brew cask install virtualbox`
+
+If you already have vagrant and virtualbox installed, just `vagrant up`
+
+Use `node app.js` to start the app.
+
+The application should then be available at `localhost:8080` from your host machine.
+
+To import `states`, `postalcodes` or other features, just use the singular version in a make
+command like:
+
+```
+  make state
+```
+
+The TIGER2014 data should download, unzip, convert to GeoJSON,
+import into the local dev mongo database `geo`, and create the necessary geo spatial indexes
+for you.
