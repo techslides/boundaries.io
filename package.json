@@ -3,8 +3,8 @@
   "version": "0.3.2",
   "dependencies": {
     "koa-compress": "1.0.8",
-    "kona": "0.10.1",
-    "kona-mongo": "0.3.0",
+    "kona": "^0.10.4",
+    "kona-mongo": "^1.0.0",
     "marked": "^0.3.5",
     "topojson": "^1.6.19"
   },
