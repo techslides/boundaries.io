@@ -4,7 +4,8 @@
   "dependencies": {
     "kona": "^0.9.6",
     "kona-mongo": "*",
-    "marked": "^0.3.5"
+    "marked": "^0.3.5",
+    "topojson": "^1.6.19"
   },
   "devDependencies": {
     "browserify": "^11.0.0",

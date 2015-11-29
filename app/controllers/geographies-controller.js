@@ -4,6 +4,7 @@ var GeographiesController = ApplicationController.extend({
 
   constructor: function() {
     ApplicationController.apply(this, arguments);
+    this.respondsTo('html', 'json', 'application/topojson');
     this.beforeFilter('_setType', '_mountCollection');
     this.nameKey = 'properties.NAME';
   },
@@ -61,8 +62,8 @@ var GeographiesController = ApplicationController.extend({
   },
 
   nearme: function* () {
-    var geo = yield this.near(this.params.lat, this.params.lng);
-    yield this.respondWith(geo);
+    var geos = yield this.near(this.params.lat, this.params.lng);
+    yield this.respondWith(geos);
   },
 
   at: function* (lat, lng, options) {
