@@ -46,9 +46,12 @@ Vagrant.configure(2) do |config|
   SHELL
 
   # configs
-  config.vm.provision 'shell', inline: <<-SHELL
-    cp ./provisioner/nginx.conf /etc/nginx/nginx.conf
-  SHELL
+  config.vm.provision 'file', {
+    source: './provisioner/nginx.conf',
+    destination: '/tmp/nginx.conf.example'
+  }
+
+  config.vm.provision 'shell', inline: 'mv /tmp/nginx.conf.example /etc/nginx/nginx.conf'
 
   # services
   config.vm.provision 'shell', inline: <<-SHELL
@@ -57,8 +60,9 @@ Vagrant.configure(2) do |config|
   SHELL
 
   # dependencies
-  config.vm.provision 'shell', inline: <<-SHELL
-    cd #{APP_DIR} && npm install
-  SHELL
+  config.vm.provision 'shell', inline: "cd #{APP_DIR} && npm install"
+
+  # bash profile
+  config.vm.provision 'shell', inline: "echo 'cd #{APP_DIR}' | tee /home/vagrant/.bashrc"
 
 end
