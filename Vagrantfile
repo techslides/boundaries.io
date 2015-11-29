@@ -34,6 +34,7 @@ Vagrant.configure(2) do |config|
   # packages
   config.vm.provision 'shell', inline: <<-SHELL
     apt-get install -y \
+      git-all \
       nginx \
       nodejs \
       mongodb-org=3.0.4 \
@@ -43,6 +44,7 @@ Vagrant.configure(2) do |config|
       mongodb-org-tools=3.0.4 \
       gdal-bin \
       jq
+    npm install -g bower
   SHELL
 
   # configs
@@ -60,7 +62,7 @@ Vagrant.configure(2) do |config|
   SHELL
 
   # dependencies
-  config.vm.provision 'shell', inline: "cd #{APP_DIR} && npm install"
+  config.vm.provision 'shell', inline: "cd #{APP_DIR} && npm install && bower install"
 
   # bash profile
   config.vm.provision 'shell', inline: "echo 'cd #{APP_DIR}' | tee /home/vagrant/.bashrc"
