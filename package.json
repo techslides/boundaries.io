@@ -25,6 +25,6 @@
   },
   "scripts": {
     "start": "node app.js",
-    "test": "./node_modules/.bin/mocha --harmony test"
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --harmony test"
   }
 }
