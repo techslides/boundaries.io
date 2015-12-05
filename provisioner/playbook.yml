@@ -1,0 +1,11 @@
+---
+- hosts: all
+  roles:
+    - common
+    - packages
+    - nginx
+    - mongodb
+    - elasticsearch
+  vars:
+    app_dir: /opt/boundaries.io
+  sudo: yes

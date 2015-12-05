@@ -1,0 +1,6 @@
+---
+- name: Set MOTD \m/
+  copy: src=motd dest=/etc/motd mode=0644
+
+- lineinfile: line="cd {{ app_dir }}" state=present dest=/home/vagrant/.bash_profile create=yes
+  become: vagrant
