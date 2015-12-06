@@ -10,6 +10,7 @@ Vagrant.configure(2) do |config|
   config.vm.hostname = 'geobox'
 
   config.vm.network 'forwarded_port', guest: 1080, host: 80, auto_correct: true
+  config.vm.network 'forwarded_port', guest: 9200, host: 9200, auto_correct: true
 
   config.vm.network 'private_network', ip: '192.168.33.10'
 

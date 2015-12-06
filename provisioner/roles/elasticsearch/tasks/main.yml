@@ -1,3 +1,7 @@
 - copy: src=elasticsearch.yml dest=/etc/elasticsearch/elasticsearch.yml owner=root group=root mode=0644
 
+# - shell: /usr/share/elasticsearch/bin/plugin install --verbose {{ item }}
+#   with_items:
+#     - mobz/elasticsearch-head
+
 - service: name=elasticsearch enabled=yes state=restarted

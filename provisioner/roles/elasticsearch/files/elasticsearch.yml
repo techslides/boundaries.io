@@ -14,7 +14,7 @@
 #
 # Use a descriptive name for your cluster:
 #
-cluster.name: adwerx
+cluster.name: stretcharmstrong
 #
 # ------------------------------------ Node ------------------------------------
 #
@@ -51,7 +51,7 @@ node.name: node-1
 #
 # Set the bind address to a specific IP (IPv4 or IPv6):
 #
-network.host: 127.0.0.1
+# network.host: 127.0.0.1
 #
 # Set a custom port for HTTP:
 #
