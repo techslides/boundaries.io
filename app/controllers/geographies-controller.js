@@ -43,27 +43,26 @@ var GeographiesController = ApplicationController.extend({
 
   named: function* () {
     var criteria = {};
-    var geo;
+    var thenable;
     criteria[this.nameKey] = new RegExp(this.params.name, 'i');
     try {
-      geo = yield this.geos.findOne(criteria);
+      thenable = this.geos.findOne(criteria);
     } catch (e) {}
-    if (geo) {
-      this.set('geography', geo);
-      yield this.respondWith(geo);
+    if (thenable) {
+      yield this.respondWith(thenable);
     } else {
       this.throw(404);
     }
   },
 
   whereami: function* () {
-    var geo = yield this.at(this.params.lat, this.params.lng);
-    yield this.respondWith(geo);
+    var thenable = this.at(this.params.lat, this.params.lng);
+    yield this.respondWith(thenable);
   },
 
   nearme: function* () {
-    var geos = yield this.near(this.params.lat, this.params.lng);
-    yield this.respondWith(geos);
+    var thenable = this.near(this.params.lat, this.params.lng);
+    yield this.respondWith(thenable);
   },
 
   at: function* (lat, lng, options) {
@@ -73,12 +72,10 @@ var GeographiesController = ApplicationController.extend({
     var lng = parseFloat(lng, 10);
     var where;
 
-    if (isNaN(lat) || isNaN(lng)) {
-      return yield this.throw(304, 'Bad Request');
-    }
-    if (!lat || !lng) return yield this.throw(304, 'Bad Request');
+    if (isNaN(lat) || isNaN(lng)) return this.throw(304, 'Bad Request');
+    if (!lat || !lng) return this.throw(304, 'Bad Request');
 
-    options = kona._.merge({limit: 5}, options);
+    options = kona._.assign({limit: 1}, options);
     where = {
       geometry: {
         $geoIntersects: {
@@ -90,7 +87,7 @@ var GeographiesController = ApplicationController.extend({
       }
     };
 
-    return yield this.geos.find(where, options).toArray();
+    return yield this.geos.findOne(where, options);
   },
 
   near: function* (lat, lng, options) {
@@ -100,9 +97,7 @@ var GeographiesController = ApplicationController.extend({
     var lng = parseFloat(lng, 10);
     var where;
 
-    if (isNaN(lat) || isNaN(lng)) {
-      return yield this.throw(304, 'Bad Request');
-    }
+    if (isNaN(lat) || isNaN(lng)) return this.throw(304, 'Bad Request');
 
     options = kona._.merge({limit: 5}, options);
     where = {
