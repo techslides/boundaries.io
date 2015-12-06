@@ -34,6 +34,8 @@ clean:
 	# pass
 
 define importAndIndex
+	mongo localhost/$(db_name) --eval "JSON.stringify(db.$1.ensureIndex({geometry: '2dsphere'}))"
+	mongo localhost/$(db_name) --eval "JSON.stringify(db.$1.ensureIndex({'$2': 'text'}))"
 	mongoimport \
 		--jsonArray \
 		--upsert \
@@ -41,8 +43,6 @@ define importAndIndex
 		--collection $1 \
 		--db $(db_name) \
 		< ./$<
-	mongo localhost/$(db_name) --eval "JSON.stringify(db.$1.ensureIndex({geometry: '2dsphere'}))"
-	mongo localhost/$(db_name) --eval "JSON.stringify(db.$1.ensureIndex({'$2': 'text'}))"
 endef
 
 .PRECIOUS: %.zip %.geo.json
