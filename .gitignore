@@ -32,3 +32,5 @@ bower_components
 
 .vagrant
 
+*.geo.json
+*.zip
