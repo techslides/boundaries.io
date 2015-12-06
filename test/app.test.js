@@ -58,7 +58,7 @@ describe('boundaries.io', function() {
           .expect(200)
           .expect('content-type', 'application/json; charset=utf-8')
           .expect(function(res) {
-            expect(res.body[0]._id).to.eq(postalcode._id)
+            expect(res.body._id).to.eq(postalcode._id)
           })
           .end(done);
       });
