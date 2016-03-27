@@ -3,6 +3,7 @@ module.exports = function(router) {
   router.get('/').to('main.about');
 
   [
+    'countries',
     'states',
     'postal-codes',
     'places',
@@ -12,6 +13,7 @@ module.exports = function(router) {
     router.get('/geographies/' + geo + '/whereami').to('geographies/' + geo + '.whereami');
     router.get('/geographies/' + geo + '/nearme').to('geographies/' + geo + '.nearme');
     router.get('/geographies/' + geo + '/named/:name').to('geographies/' + geo + '.named');
+    router.get('/geographies/' + geo + '/autocomplete').to('geographies/' + geo + '.autocomplete');
     router.resource('geographies/' + geo);
   });
 }

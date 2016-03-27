@@ -35,6 +35,27 @@ var GeographiesController = ApplicationController.extend({
     yield this.respondWith(geos);
   },
 
+  autocomplete: function* () {
+    var query = {
+      index: this.collection,
+      type: 'geo',
+      body: {
+        name_suggestion: {
+          text: this.params.query || this.params.q,
+          completion: {
+            field: 'suggest'
+          }
+        }
+      }
+    };
+    console.log(query)
+    var results = yield this.es.suggest(query);
+
+    console.log(results);
+
+    yield this.respondWith(results);
+  },
+
   show: function* () {
     var geo = yield this.geos.findOne({
       _id: this.mongo._db.bsonLib.ObjectID(this.params.id)
@@ -44,17 +65,24 @@ var GeographiesController = ApplicationController.extend({
   },
 
   named: function* () {
-    var criteria = {};
-    var thenable;
-    criteria[this.nameKey] = new RegExp(this.params.name, 'i');
-    try {
-      thenable = this.geos.findOne(criteria);
-    } catch (e) {}
-    if (thenable) {
-      yield this.respondWith(thenable);
-    } else {
-      this.throw(404);
-    }
+    yield this.respondWith(this.findByName(this.params.name));
+  },
+
+  findByName: function* (name) {
+    var query = {};
+    query[this.nameKey] = this.params.name;
+
+    var results = yield this.es.search({
+      index: this.collection,
+      type: 'geo',
+      body: {
+        query: {
+          match: query
+        }
+      },
+      size: 1
+    });
+    return results.hits.hits.map((res) => res._source);
   },
 
   whereami: function* () {
@@ -68,31 +96,6 @@ var GeographiesController = ApplicationController.extend({
   },
 
   at: function* (lat, lng, options) {
-    options || (options = {});
-
-    var lat = parseFloat(lat, 10);
-    var lng = parseFloat(lng, 10);
-    var where;
-
-    if (isNaN(lat) || isNaN(lng)) return this.throw(304, 'Bad Request');
-    if (!lat || !lng) return this.throw(304, 'Bad Request');
-
-    options = kona._.assign({limit: 1}, options);
-    where = {
-      geometry: {
-        $geoIntersects: {
-          $geometry: {
-            type: 'Point',
-            coordinates: [lng, lat]
-          }
-        }
-      }
-    };
-
-    return yield this.geos.findOne(where, options);
-  },
-
-  atES: function* (lat, lng, options) {
     options || (options = {});
 
     var lat = parseFloat(lat, 10);
