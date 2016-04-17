@@ -1,0 +1,18 @@
+version: '2'
+services:
+  web:
+    build: .
+    ports:
+      - "3334:3334"
+    links:
+      - db
+    depends_on:
+      - db
+  db:
+    image: mongo:3.1.9
+    volumes_from:
+      - data
+  data:
+    image: busybox:latest
+    volumes:
+      - /data
