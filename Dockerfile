@@ -9,7 +9,7 @@ RUN apk add --no-cache \
   unzip \
   zlib-dev
 
-ENV NODE_ENV production
+ENV NODE_ENV development
 
 WORKDIR /app
 ADD . .
