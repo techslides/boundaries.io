@@ -1,15 +1,25 @@
 version: '2'
 services:
+  console:
+    build: ./console
+    command: "true"
+    volumes:
+      - ./console:/app
+    links:
+      - db
   web:
     build: .
+    volumes:
+      - .:/app
+      - /node_modules
     ports:
       - "3334:3334"
     links:
       - db
   db:
     image: mongo:3.1.9
-    volumes_from:
-      - data
+    # volumes_from:
+    #   - data
     ports:
       - "27017:27017"
   data:

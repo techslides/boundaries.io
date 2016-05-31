@@ -9,6 +9,8 @@ RUN apk add --no-cache \
   unzip \
   zlib-dev
 
+ENV NPM_CONFIG_PREFIX /node_modules
+
 ENV NODE_ENV development
 
 WORKDIR /app
