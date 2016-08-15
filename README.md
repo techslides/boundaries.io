@@ -116,7 +116,7 @@ data and the [Durham Hoods](http://durhamhoods.com/) project.
 
 ### Setting up a development environment
 
-A development environment can be setup expediently with docker-compose. Install Docker for Mac (or your platform) and run `docker-compose up` to get the server up and running.
+A development environment can be setup expediently with docker-compose. Install [Docker for Mac](https://docs.docker.com/engine/installation/mac/) (or your platform) and run `docker-compose up` to get the server up and running.
 
 
 
