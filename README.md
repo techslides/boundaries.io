@@ -116,20 +116,11 @@ data and the [Durham Hoods](http://durhamhoods.com/) project.
 
 ### Setting up a development environment
 
-You can use vagrant / virtualbox to setup a dev environment easily. See the `Vagrantfile` for
-dependencies if you opt to not use a VM.
+A development environment can be setup expediently with docker-compose. Install Docker for Mac (or your platform) and run `docker-compose up` to get the server up and running.
 
-Make sure you have `vagrant` and `virtualbox`
 
-`brew cask install vagrant`
 
-`brew cask install virtualbox`
-
-If you already have vagrant and virtualbox installed, just `vagrant up`
-
-Use `node app.js` to start the app.
-
-The application should then be available at `localhost:8080` from your host machine.
+The application should then be available at `localhost:3334` from your host machine (or docker machine).
 
 To import `states`, `postalcodes` or other features, just use the singular version in a make
 command like:
@@ -141,3 +132,5 @@ command like:
 The TIGER2014 data should download, unzip, convert to GeoJSON,
 import into the local dev mongo database `geo`, and create the necessary geo spatial indexes
 for you.
+
+Or use `mongorestore ./dump` after downloading and extracting a [mongodump of the production database](https://s3.amazonaws.com/jb-storage/geo.tar.gz). Docker-compose will expose the mongo database on port 27017 of your localhost, so no connection details are necessary.
