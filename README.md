@@ -22,20 +22,20 @@ Available geographies are as follows:
 `neighborhoods`
 `counties`
 
-These can be substituted anywhere a url references a path segment `:geo-name`
+These can be substituted anywhere a url references a path segment `{geography}`
 
 
 Text Search
 ---
 
-`geographies/:geo-name?search={query}`
+`geographies/{geography}?search={query}`
 
 Geographies can be searched via text to match against all attributes. This is
 helpful as the property names for certain geographies can be very specific in nature
 to the geography or datasource. For instance, a common 5-digit US postal code is contained
 in the property `properties.ZCTA5CE10` in the `postal-codes` geography. In order to not keep
 track of specific collection-based common names like `ZCTA5CE10`, a search paramter is used on
-the `geographies/:geo-name` endpoint to search all text fields for a url query `?search`.
+the `geographies/{geography}` endpoint to search all text fields for a url query `?search`.
 
 Example:
 
@@ -47,7 +47,7 @@ curl -H 'Accept: application/json' http://boundaries.io/geographies/postal-codes
 Where Am I?
 ---
 
-`geographies/:geo-name/whereami?lat={latitude}&lng={longitude}`
+`geographies/{geography}/whereami?lat={latitude}&lng={longitude}`
 
 When querying the `whereami` endpoint, the geography that contains the provided latitude/longitude pair will be returned if found.
 For instance, when requesting `geographies/postal-codes/whereami?lat=36.011616617997426&lng=-78.9103317260742`,
@@ -66,7 +66,7 @@ curl -H 'Accept: application/json' http://boundaries.io/geographies/postal-codes
 Named
 ---
 
-`geographies/:geo-name/named/{name}`
+`geographies/{geography}/named/{name}`
 
 The typical name key for geographies from the US Census TIGER shapefiles is `properties.NAME`, but for postal-codes is
 `properties.ZCTA5CE10`. Geographies can be queried against the identifying key with the `named` endpoint.
@@ -80,11 +80,28 @@ curl -H 'accept: application/json' http://boundaries.io/geographies/postal-codes
 curl -H 'accept: application/json' http://boundaries.io/geographies/states/named/north%20carolina
 ```
 
+Named (SVG Image)
+---
+
+`geographies/{geography}/named/{name}.svg`
+
+Parameters:
+
+`width`, `height`, `stroke`, `fill`
+
+Example:
+
+```
+curl http://boundaries.io/geographies/states/named/north%20carolina.svg
+# => <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300">
+#        <path d="M64.0623532378737,21.511595932804283
+```
+
 
 Near Me
 ---
 
-`geographies/:geo-name/nearme?lat={latitude}&lng={longitude}`
+`geographies/{geography}/nearme?lat={latitude}&lng={longitude}`
 
 Similar to the `whereami` endpoint, one can query the nearby geographies with the `nearme` endpoint. Simply provide a lat/lng
 
