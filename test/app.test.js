@@ -89,6 +89,26 @@ describe('boundaries.io', function() {
           })
           .end(done);
       });
+
+      describe('.svg', function() {
+
+        it('returns an svg string of the geometry', function(done) {
+
+          var path = '/geographies/postal-codes/named/' + postalcode.properties['GEOID10'] + '.svg';
+
+          agent
+            .get(path)
+            .expect(200)
+            .expect('content-type', 'image/svg+xml')
+            .expect(function(res) {
+              expect(res.body.toString()).to.contain('M137.69088842490171,190.79525229527445');
+            })
+            .end(done);
+
+        });
+
+      });
+
     });
 
   });

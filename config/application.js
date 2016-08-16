@@ -24,7 +24,7 @@ module.exports = function(config) {
     reduction = (1 - Math.round((after / before) * 100) / 100)
     // this.ctx.set('X-Topojson-Reduction', reduction > 0 ? reduction : 0);
 
-    return yield topology;
+    return yield Promise.resolve(topology);
   });
 
 };
